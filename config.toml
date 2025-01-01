@@ -1,0 +1,12 @@
+# This is your theme-specific configuration
+# These are the default values that can be overridden by the user's config.toml
+
+[extra]
+# Theme-specific variables
+show_newsletter = true
+show_breadcrumbs = true
+footer_links = [
+    {name = "Terms", url = "/terms"},
+    {name = "Privacy Policy", url = "/privacy"},
+    {name = "Manage cookies", url = "/cookies"}
+]

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ term.name }} | {{ config.title }}
+{% endblock title %}
+
+{% block body_class %}inner-page{% endblock body_class %}
+
+{% block content %}
+<main class="main-content">
+    {% include "components/header.html" %}
+    <div class="container">
+        {% include "components/breadcrumb.html" %}
+        <section class="blog-archive">
+            <h1 class="blog-title">{{ term.name }}</h1>
+            <div class="articles-grid">
+                {% for page in term.pages %}
+                    <article class="article-card">
+                        <div class="category-wrapper">
+                            {% if page.taxonomies.categories %}
+                                <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) | safe }}" class="category-tag">
+                                    {{ page.taxonomies.categories[0] }}
+                                </a>
+                            {% endif %}
+                        </div>
+                        <h3 class="article-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+                        {% if page.description %}
+                            <p class="article-description">{{ page.description }}</p>
+                        {% endif %}
+                        <div class="article-meta">
+                            <span class="date">{{ page.date | date(format="%d %B %Y") }}</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% include "components/newsletter.html" %}
+    </div>
+</main>
+{% endblock content %}

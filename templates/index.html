@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% import "components/latest-posts-grid.html" as posts_grid %}
+
+{% block title %}
+    {{ section.title }} | {{ config.title }}
+{% endblock title %}
+
+{% block body_class %}home{% endblock body_class %}
+
+{% block content %}
+<main class="container">
+    {# Hero section #}
+    {% include "components/hero.html" %}
+
+    {# Article grid section #}
+    {% include "components/grid-home.html" %}
+
+    {# Latest Posts section #}
+    {{ posts_grid::latest_posts() }}
+
+    {# Newsletter section #}
+    {% include "components/newsletter.html" %}
+</main>
+{% endblock content %}

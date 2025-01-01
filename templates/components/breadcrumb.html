@@ -1,0 +1,20 @@
+<nav class="breadcrumb">
+    <a href="/">Home</a>
+    {% if section %}
+        {% for ancestor in section.ancestors %}
+            {% if not loop.first %}
+                {% set parent = get_section(path=ancestor) %}
+                <span class="separator">›</span>
+                <a href="{{ parent.path }}">{{ parent.title }}</a>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for ancestor in page.ancestors %}
+            {% if not loop.first %}
+                {% set parent = get_section(path=ancestor) %}
+                <span class="separator">›</span>
+                <a href="{{ parent.path }}">{{ parent.title }}</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</nav>

@@ -1,0 +1,54 @@
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="{{ config.base_url }}" class="logo">
+                <div><img src="{{ get_url(path="/images/citta-metropolitana-venezia-logo.png")  }}" width="200" height="40" alt="Città Metropolitana di Venezia Logo"></div>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+    <div class="menu-content">
+        <div class="menu-header">
+            <a href="{{ config.base_url }}" class="logo">
+                <div><img src="{{ get_url(path="/images/citta-metropolitana-venezia-logo.png")  }}" width="200" height="40" alt="Città Metropolitana di Venezia Logo"></div>
+            </a>
+            <button class="close-menu" id="closeMenu">×</button>
+        </div>
+        <nav class="main-menu">
+            <ul>
+                {% set root = get_section(path="_index.md") %}
+                
+                {% set nav_items = [] %}
+                
+                {% for section_path in root.subsections %}
+                    {% set section = get_section(path=section_path) %}
+                    {% if section.extra.is_main_nav %}
+                        {% set_global nav_items = nav_items | concat(with=[section]) %}
+                    {% endif %}
+                {% endfor %}
+                
+                {% set pages_nav = root.pages | filter(attribute="extra.is_main_nav", value=true) %}
+                {% set_global nav_items = nav_items | concat(with=pages_nav) %}
+                
+                {% for item in nav_items | sort(attribute="extra.weight") %}
+                    <li>
+                        <a href="{{ item.path }}">
+                            {{ item.extra | get(key="nav_title", default=item.title) }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div class="menu-footer">
+            <a href="#" class="contact-button">Contact me</a>
+            <a href="#" class="signup-button">Sign up free</a>
+        </div>
+    </div>
+</div>

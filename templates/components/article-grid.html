@@ -1,0 +1,26 @@
+{% if section.pages or section.subsections %}
+<section class="sub-pages">
+    <h2>{{ config.extra.grid_pages }}</h2>
+    <div class="articles-grid">
+        {% for subpage in section.pages | sort(attribute="extra.weight") %}
+            <article class="article-card">
+                <span class="category">{{ subpage.extra.card_mini_title }}</span>
+                <h3><a href="{{ subpage.path }}">{{ subpage.title }}</a></h3>
+                <p>{{ subpage.extra.card_abstract | default(value=subpage.description) }}</p>
+            </article>
+        {% endfor %}
+        
+        {% set_global subsections = [] %}
+        {% for subsection_path in section.subsections %}
+            {% set_global subsections = subsections | concat(with=get_section(path=subsection_path)) %}
+        {% endfor %}
+        {% for subsection in subsections | sort(attribute="extra.weight") %}
+            <article class="article-card">
+                <span class="category">{{ subsection.extra.card_mini_title | default(value="Section") }}</span>
+                <h3><a href="{{ subsection.path }}">{{ subsection.title }}</a></h3>
+                <p>{{ subsection.extra.card_abstract | default(value=subsection.description) }}</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

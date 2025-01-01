@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ taxonomy.name | title }} | {{ config.title }}
+{% endblock title %}
+
+{% block body_class %}inner-page{% endblock body_class %}
+
+{% block content %}
+<main class="main-content">
+    {% include "components/header.html" %}
+    <div class="container">
+       
+        <section class="blog-archive">
+            <h1 class="blog-title">{{ taxonomy.name | title }}</h1>
+            <div class="articles-grid">
+                {% for term in terms %}
+                    <article class="article-card">
+                        <div class="category-wrapper">
+                            <a href="{{ term.permalink }}" class="category-tag">
+                                {{ term.name }}
+                            </a>
+                        </div>
+                        <h3 class="article-title">
+                            <a href="{{ term.permalink }}">{{ term.name }}</a>
+                        </h3>
+                        <div class="article-meta">
+                            <span class="count">{{ term.pages | length }} posts</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% include "components/newsletter.html" %}
+    </div>
+</main>
+{% endblock content %}

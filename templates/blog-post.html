@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% import "components/latest-posts-grid.html" as posts_grid %}
+
+{% block title %}
+    {{ page.title }} | {{ config.title }}
+{% endblock title %}
+
+{% block body_class %}inner-page{% endblock body_class %}
+
+{% block content %}
+<main class="main-content">
+    {% include "components/header.html" %}
+    <div class="container">
+        {# Breadcrumb navigation #}
+        {% include "components/breadcrumb.html" %}
+        
+        <article class="content">
+            <p class="category">
+                📅 {{ page.date | date(format="%d-%m-%Y") }} - ✍️  
+                <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) }}" class="category-tag">
+                    {{ page.taxonomies.categories[0] | title }}
+                </a>
+            </p>            <h1>{{ page.title }}</h1>
+
+            
+            
+            {# Table of Contents #}
+            {% include "components/table-of-contents.html" %}
+            
+            {# Page content #}
+            <div class="content-section">
+                {{ page.content | safe }}
+            </div>
+
+            {# Related articles grid #}
+            
+        </article>
+        {% include "components/article-grid.html" %}
+        {{ posts_grid::latest_posts() }}
+        {% include "components/newsletter.html" %}
+    </div>
+</main>
+{% endblock content %}

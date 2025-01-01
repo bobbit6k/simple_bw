@@ -1,0 +1,17 @@
+{% if current_path != "/" %}
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const closeMenu = document.getElementById('closeMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    menuToggle.addEventListener('click', () => {
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenu.addEventListener('click', () => {
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+</script>
+{% endif %}

@@ -1,0 +1,10 @@
+<footer>
+    <div class="footer-content">
+        <div class="copyright">{{ config.extra.footer_note }}</div>
+        <div class="footer-links">
+            {% for link in config.extra.footer_links %}
+                <a href="{{ link.url }}" rel="nofollow">{{ link.text }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</footer>

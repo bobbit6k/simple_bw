@@ -1,0 +1,68 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+    <link rel="icon" type="image/png"  href="/images/venezia-citta-metropolitana.png">
+
+
+
+    {# Meta Description Block #}
+    <meta name="description" content="{% block description %}
+        {%- if page.description -%}
+            {{ page.description }}
+        {%- elif section.description -%}
+            {{ section.description }}
+        {%- else -%}
+            {{ config.description }}
+        {%- endif -%}
+    {% endblock description %}">
+
+    {# Include social share meta tags #}
+    {% include "components/social-share.html" %}
+
+    {{ macros::inline_styles() }}
+
+    <meta name="robots" content="{% if page.extra.noindex or section.extra.noindex %}noindex, nofollow{% else %}index, follow{% endif %}">
+
+    
+    {# Fonts and Stylesheets #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script defer src="https://auburn-kestrel.pikapod.net/script.js" data-website-id="869c2fbe-a3d1-4638-a948-4381cadd7a2e"></script>
+
+   
+
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+<body lang="{{ config.default_language }}" class="{% block body_class %}{% endblock body_class %}">
+    {# Include header with menu overlay #}
+    
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+    {# Include footer #}
+    {% include "components/footer.html" %}
+
+    {# Scripts #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    
+    {% include "components/extra-scripts.html" %}
+    
+</body>
+</html>

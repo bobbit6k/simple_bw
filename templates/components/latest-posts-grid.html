@@ -1,0 +1,32 @@
+{% macro latest_posts() %}
+    {# Check if latest_posts is false in either page or section extra data #}
+    {% set hide_posts = (page.extra.latest_posts is defined and page.extra.latest_posts == false) or 
+                       (section.extra.latest_posts is defined and section.extra.latest_posts == false) %}
+    
+    {% if not hide_posts %}
+        {% set blog_section = get_section(path="blog/_index.md") %}
+        {% if blog_section %}
+            {% set posts = blog_section.pages %}
+            {% if posts %}
+                <section class="sub-pages">
+                    <h2>{{ config.extra.grid_blog }}</h2>
+                    <div class="articles-grid">
+                        {% for post in posts | slice(end=6) %}
+                            <article class="article-card">
+                                {% if post.taxonomies and post.taxonomies.categories %}
+                                    <span class="category">
+                                        <a class="category-tag" href="{{ get_taxonomy_url(kind="categories", name=post.taxonomies.categories[0]) }}">
+                                            {{ post.taxonomies.categories[0] }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                                <h3><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
+                                <p>{{ post.description }}</p>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endmacro latest_posts %}

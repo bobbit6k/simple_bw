@@ -1,0 +1,25 @@
+<section class="sub-pages">
+    <h2>{{ config.extra.grid_home }}</h2>
+    <div class="articles-grid">
+        {% set root = get_section(path="_index.md") %}
+        {% set pages_nav = root.pages | filter(attribute="extra.is_main_nav", value=true) %}
+        {% set sections_nav = [] %}
+        {% for section_path in root.subsections %}
+            {% set section = get_section(path=section_path) %}
+            {% if section.extra.is_main_nav %}
+                {% set_global sections_nav = sections_nav | concat(with=section) %}
+            {% endif %}
+        {% endfor %}
+        
+        {% set all_items = sections_nav | concat(with=pages_nav) %}
+        {% set sorted_items = all_items | sort(attribute="extra.weight") %}
+        
+        {% for item in sorted_items %}
+            <article class="article-card">
+                <span class="category">{{ item.extra.card_mini_title }}</span>
+                <h3><a href="{{ item.path }}">{{ item.title }}</a></h3>
+                <p>{{ item.extra.card_abstract | default(value=item.description) }}</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>

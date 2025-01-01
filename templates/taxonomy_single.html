@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ term.name }} | {{ config.title }}
+{% endblock title %}
+
+{% block body_class %}inner-page{% endblock body_class %}
+
+{% block content %}
+<main class="main-content">
+    {% include "components/header.html" %}
+    <div class="container">
+        <section class="blog-archive">
+            <h1 class="blog-title">{{ term.name }}</h1>
+            <div class="articles-grid">
+                {% for page in paginator.pages %}
+                    <article class="article-card">
+                        <div class="category-wrapper">
+                            {% if page.taxonomies.categories %}
+                                <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) | safe }}" class="category-tag">
+                                    {{ page.taxonomies.categories[0] }}
+                                </a>
+                            {% endif %}
+                        </div>
+                        <h3 class="article-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+                        {% if page.description %}
+                            <p class="article-description">{{ page.description }}</p>
+                        {% endif %}
+                        <div class="article-meta">
+                            <span class="date">{{ page.date | date(format="%d %B %Y") }}</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+
+            {% if paginator.number_pagers > 1 %}
+                <div class="pagination-controls">
+                    {% if paginator.previous %}
+                        <a href="{{ paginator.previous }}" class="pagination-button prev">{{ config.extra.paginator_previous }}</a>
+                    {% endif %}
+                    
+                    <span class="page-indicator">{{ config.extra.paginator_page }} {{ paginator.current_index }} {{ config.extra.paginator_of }} {{ paginator.number_pagers }}</span>
+                    
+                    {% if paginator.next %}
+                        <a href="{{ paginator.next }}" class="pagination-button next">{{ config.extra.paginator_next }}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+        {% include "components/newsletter.html" %}
+    </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,5 @@
+{% macro inline_styles() %}
+<style>
+{{ load_data(path="public/style.css") | safe }}
+</style>
+{% endmacro %}

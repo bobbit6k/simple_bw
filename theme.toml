@@ -1,0 +1,12 @@
+name = "simple_bw"
+description = "A modern, responsive theme"
+license = "MIT"
+homepage = "https://github.com/yourusername/shufflebtw"
+min_version = "0.4.0"
+
+[author]
+name = "Roberto Berneri"
+homepage = "https://robertoberneri.com"
+
+[extra]
+# Any default theme settings that should be available to users
