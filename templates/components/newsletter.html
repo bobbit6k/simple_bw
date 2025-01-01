@@ -1,3 +1,4 @@
+{% if config.extra.block_newsletter | default(value=true) %}
 <section class="newsletter">
     <h2>Join the community, subscribe now</h2>
     <p>Shape Tomorrow with Digital Learning Today!</p>
@@ -7,3 +8,4 @@
     </form>
     <p class="form-note">Get the ideas, tools and tips you need to grow your sound straight.</p>
 </section>
+{% endif %}

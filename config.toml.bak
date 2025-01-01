@@ -1,0 +1,63 @@
+# Base configuration
+base_url = "https://veneziacittametropolitana.it"
+title = "Città Metropolitana di Venezia"
+theme = "simple_bw"
+compile_sass = true
+build_search_index = true
+default_language = "it"
+
+# Feed configuration
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+feed_limit = 5
+
+# Taxonomies configuration
+taxonomies = [
+    {name = "categories", feed = true, paginate_by = 10}
+]
+
+# Minification settings
+minify_html = true
+hard_link_static = false
+
+[markdown]
+highlight_code = true
+highlight_theme = "dracula"
+
+[extra]
+# Site metadata
+default_og_image = "images/social_share.png"
+author = "scrivi@veneziacittametropoltana.it (Redazione Venezia Città Metropolitana)"
+description = "Guida della Città Metropolitana di Venezia"
+
+# Feed metadata
+feed_title = "Città Metropolitana di Venezia - Blog"
+feed_description = "Notizie e aggiornamenti dalla Città Metropolitana di Venezia"
+
+# Navigation and UI text
+footer_links = [
+    { text = "Contatti", url = "/contatti" },
+    { text = "Privacy, Cookies & Gdpr", url = "/privacy" },
+]
+
+footer_note = "© Lo Staff di Venezia Città Metropolitana 2023."
+
+grid_home = "Sezioni del Sito"
+grid_pages = "In Questa Sezione"
+toc_intro = "Indice dei Contenuti"
+archive_blog = "Blog"
+grid_blog = "Ultimi Articoli"
+
+
+paginator_next = "Più Vecchi"
+paginator_previous = "Più Recenti"
+paginator_page = "Pagina"
+paginator_of = "di"
+
+#blocks
+block_newsletter = false
+
+# Feed Links
+rss = [
+    {url = "/rss.xml", title = "RSS Feed completo"}
+]
