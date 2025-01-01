@@ -1,7 +1,7 @@
 name = "simple_bw"
-description = "A modern, responsive theme"
+description = "A simple, responsive theme for Zola SSG"
 license = "MIT"
-homepage = "https://github.com/yourusername/shufflebtw"
+homepage = "https://github.com/bobbit6k/simple_bw"
 min_version = "0.4.0"
 
 [author]
